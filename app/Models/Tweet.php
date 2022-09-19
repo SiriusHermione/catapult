@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-// app/Http/Models/Tweet.php
-
 class Tweet extends Model
 {
   use HasFactory;
@@ -17,12 +15,25 @@ class Tweet extends Model
     'updated_at',
   ];
 
-  // 🔽 追加
   public static function getAllOrderByUpdated_at()
   {
     return self::orderBy('updated_at', 'desc')->get();
   }
+
+  // 🔽 追加
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
+
+  public function users()
+  {
+    return $this->belongsToMany(User::class)->withTimestamps();
+  }
+
 }
+
+
 
 
 
